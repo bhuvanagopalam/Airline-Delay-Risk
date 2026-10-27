@@ -32,17 +32,30 @@ Target balance: 39% of rows are high-delay months. Both models use `class_weight
 
 ## Results
 
-Stratified 80/20 split, 136,978 training rows, 34,245 held out. Numbers are from `results/metrics.json`,
-produced by `python train.py`.
+Two held-out evaluations, both 80/20, both from `python train.py` (numbers in `results/metrics.json`).
+
+**Random stratified split.** This is how the course report split the data. Because every
+carrier-airport pair has up to 132 monthly rows, 2,528 of the 2,630 pairs end up on both sides of
+the split, and the models partly memorise pairs rather than learn what makes a month bad.
+
+| Model | Accuracy | ROC-AUC | High-delay precision | High-delay recall |
+|---|---|---|---|---|
+| Random Forest (300 trees) | 77.1% | 0.854 | 0.69 | 0.75 |
+| LightGBM (800 rounds, 63 leaves) | 78.1% | 0.869 | 0.69 | 0.79 |
+
+**Grouped split by carrier-airport pair.** Every pair is entirely in train or entirely in test
+(zero overlap, 526 unseen pairs in the test set). This is the honest number: how well the model
+predicts a bad month for a carrier-airport combination it has never seen.
 
 | Model | Accuracy | ROC-AUC | High-delay precision | High-delay recall | F1 (high delay) |
 |---|---|---|---|---|---|
-| Random Forest (300 trees) | 77.1% | 0.854 | 0.69 | 0.75 | 0.72 |
-| LightGBM (800 rounds, 63 leaves) | 78.1% | 0.869 | 0.69 | 0.79 | 0.74 |
+| Random Forest (300 trees) | 76.1% | 0.839 | 0.68 | 0.75 | 0.71 |
+| LightGBM (800 rounds, 63 leaves) | 76.2% | **0.852** | 0.67 | 0.79 | 0.72 |
 
-LightGBM wins on every metric, most usefully on recall for the high-delay class: it catches 79%
-of bad months against 75% for the forest, at the same precision. In the course report, which used
-a slightly different feature set, the same comparison came out at 0.83 versus 0.849 AUC.
+The random split overstates LightGBM by about 0.017 AUC. The grouped number is the one quoted on
+my portfolio. LightGBM beats the forest on both splits, most usefully on recall for the
+high-delay class: it catches 79% of bad months against 75%. The course report, with a slightly
+different feature set and the random split, found 0.83 against 0.849.
 
 ![ROC curves](results/roc.png)
 
@@ -61,7 +74,7 @@ pip install -r requirements.txt
 python train.py
 ```
 
-Runs in about 90 seconds on a laptop CPU and writes `results/metrics.json`, `results/roc.png` and
+Runs in about two minutes on a laptop CPU and writes `results/metrics.json`, `results/roc.png` and
 `results/feature_importance.png`.
 
 ## Data

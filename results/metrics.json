@@ -1,63 +1,115 @@
 {
-  "n_train": 136978,
-  "n_test": 34245,
+  "n_rows": 171223,
   "n_features": 430,
+  "n_pairs": 2630,
   "high_delay_share": 0.3907,
-  "models": [
-    {
-      "model": "Random Forest",
-      "accuracy": 0.7713,
-      "precision_high_delay": 0.6907,
-      "recall_high_delay": 0.7507,
-      "f1_high_delay": 0.7195,
-      "recall_low_delay": 0.7845,
-      "roc_auc": 0.8536,
-      "confusion_matrix": [
-        [
-          16368,
-          4497
-        ],
-        [
-          3336,
-          10044
-        ]
+  "splits": {
+    "random_stratified": {
+      "n_train": 136978,
+      "n_test": 34245,
+      "pairs_on_both_sides": 2528,
+      "models": [
+        {
+          "model": "Random Forest",
+          "accuracy": 0.7713,
+          "precision_high_delay": 0.6907,
+          "recall_high_delay": 0.7507,
+          "f1_high_delay": 0.7195,
+          "recall_low_delay": 0.7845,
+          "roc_auc": 0.8536,
+          "confusion_matrix": [
+            [
+              16368,
+              4497
+            ],
+            [
+              3336,
+              10044
+            ]
+          ]
+        },
+        {
+          "model": "LightGBM",
+          "accuracy": 0.7807,
+          "precision_high_delay": 0.6926,
+          "recall_high_delay": 0.7888,
+          "f1_high_delay": 0.7376,
+          "recall_low_delay": 0.7755,
+          "roc_auc": 0.8691,
+          "confusion_matrix": [
+            [
+              16180,
+              4685
+            ],
+            [
+              2826,
+              10554
+            ]
+          ]
+        }
       ]
     },
-    {
-      "model": "LightGBM",
-      "accuracy": 0.7807,
-      "precision_high_delay": 0.6926,
-      "recall_high_delay": 0.7888,
-      "f1_high_delay": 0.7376,
-      "recall_low_delay": 0.7755,
-      "roc_auc": 0.8691,
-      "confusion_matrix": [
-        [
-          16180,
-          4685
-        ],
-        [
-          2826,
-          10554
-        ]
+    "grouped_by_pair": {
+      "n_train": 136639,
+      "n_test": 34584,
+      "pairs_on_both_sides": 0,
+      "models": [
+        {
+          "model": "Random Forest",
+          "accuracy": 0.7609,
+          "precision_high_delay": 0.68,
+          "recall_high_delay": 0.7487,
+          "f1_high_delay": 0.7127,
+          "recall_low_delay": 0.7689,
+          "roc_auc": 0.8394,
+          "confusion_matrix": [
+            [
+              16057,
+              4827
+            ],
+            [
+              3443,
+              10257
+            ]
+          ]
+        },
+        {
+          "model": "LightGBM",
+          "accuracy": 0.7615,
+          "precision_high_delay": 0.6686,
+          "recall_high_delay": 0.7891,
+          "f1_high_delay": 0.7239,
+          "recall_low_delay": 0.7434,
+          "roc_auc": 0.8522,
+          "confusion_matrix": [
+            [
+              15526,
+              5358
+            ],
+            [
+              2889,
+              10811
+            ]
+          ]
+        }
       ]
     }
-  ],
-  "top_engineered_features": {
-    "carrier_month_flights": 5557,
-    "carrier_airports_served": 5191,
-    "arr_flights": 3807,
-    "year": 3556,
-    "carrier_share_at_airport": 3007,
-    "month": 2804,
-    "airport_month_flights": 2438,
-    "airport_share_of_national": 2377,
-    "cancel_rate": 2280,
-    "airport_month_carriers": 1194,
-    "arr_cancelled": 913,
-    "log_arr_flights": 857,
-    "divert_rate": 825,
-    "is_summer": 517,
-    "is_winter": 431
+  },
+  "top_engineered_features_grouped_lightgbm": {
+    "carrier_month_flights": 5692,
+    "carrier_airports_served": 5053,
+    "arr_flights": 3877,
+    "year": 3638,
+    "carrier_share_at_airport": 2859,
+    "month": 2817,
+    "airport_month_flights": 2479,
+    "airport_share_of_national": 2374,
+    "cancel_rate": 2136,
+    "airport_month_carriers": 1235,
+    "arr_cancelled": 937,
+    "divert_rate": 838,
+    "log_arr_flights": 737,
+    "is_summer": 483,
+    "is_winter": 451
   }
 }

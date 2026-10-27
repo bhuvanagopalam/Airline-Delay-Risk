@@ -1,0 +1,63 @@
+{
+  "n_train": 136978,
+  "n_test": 34245,
+  "n_features": 430,
+  "high_delay_share": 0.3907,
+  "models": [
+    {
+      "model": "Random Forest",
+      "accuracy": 0.7713,
+      "precision_high_delay": 0.6907,
+      "recall_high_delay": 0.7507,
+      "f1_high_delay": 0.7195,
+      "recall_low_delay": 0.7845,
+      "roc_auc": 0.8536,
+      "confusion_matrix": [
+        [
+          16368,
+          4497
+        ],
+        [
+          3336,
+          10044
+        ]
+      ]
+    },
+    {
+      "model": "LightGBM",
+      "accuracy": 0.7807,
+      "precision_high_delay": 0.6926,
+      "recall_high_delay": 0.7888,
+      "f1_high_delay": 0.7376,
+      "recall_low_delay": 0.7755,
+      "roc_auc": 0.8691,
+      "confusion_matrix": [
+        [
+          16180,
+          4685
+        ],
+        [
+          2826,
+          10554
+        ]
+      ]
+    }
+  ],
+  "top_engineered_features": {
+    "carrier_month_flights": 5557,
+    "carrier_airports_served": 5191,
+    "arr_flights": 3807,
+    "year": 3556,
+    "carrier_share_at_airport": 3007,
+    "month": 2804,
+    "airport_month_flights": 2438,
+    "airport_share_of_national": 2377,
+    "cancel_rate": 2280,
+    "airport_month_carriers": 1194,
+    "arr_cancelled": 913,
+    "log_arr_flights": 857,
+    "divert_rate": 825,
+    "is_summer": 517,
+    "is_winter": 431
+  }
+}
